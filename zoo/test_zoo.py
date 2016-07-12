@@ -7,13 +7,11 @@ class TestAnimal(unittest.TestCase):
 	def setUpClass(self):
 		pass
 
-	def test_name_empty_string_by_default(self):
-		a_animal = zoo.Animal()
-		self.assertEqual(a_animal.name, '')
-
-	def test_species_none_by_default(self):
-		a_animal = zoo.Animal()
-		self.assertEqual(a_animal.species, None)
+	def test_animal_creation(self):
+		bob = zoo.Betta('orange', 'Bob')
+		self.assertEqual(bob.name, 'Bob')
+		self.assertEqual(bob.species.color, 'orange')
+		self.assertIsInstance(bob.species, zoo.BettaTrifasciata)
 
 class TestSpecies(unittest.TestCase):
 
@@ -34,6 +32,43 @@ class TestHabitat(unittest.TestCase):
 	def test_members_empty_set_by_default(self):
 		habitat = zoo.Habitat()
 		self.assertIsInstance(habitat.members, set)
+
+class TestWalking(unittest.TestCase):
+
+	def test_legs_zero_by_default(self):
+		walking = zoo.Walking()
+		self.assertEqual(walking.legs, 0)
+
+	def test_walk_speed_zero_by_default(self):
+		walking = zoo.Walking()
+		self.assertEqual(walking.walk_speed, 0)
+
+class TestSwimming(unittest.TestCase):
+
+	def test_appendages_false_by_default(self):
+		swimming = zoo.Swimming()
+		self.assertFalse(swimming.fins)
+		self.assertFalse(swimming.flippers)
+		self.assertFalse(swimming.web_feet)
+
+	def test_swim_speed_zero_by_default(self):
+		swimming = zoo.Swimming()
+		self.assertEqual(swimming.swim_speed, 0)
+
+class TestFlying(unittest.TestCase):
+
+	def test_wings_zero_by_default(self):
+		flying = zoo.Flying()
+		self.assertFalse(flying.wings, 0)
+
+	def test_wingspan_zero_by_default(self):
+		flying = zoo.Flying()
+		self.assertFalse(flying.wingspan, 0)
+
+	def test_air_speed_zero_by_default(self):
+		flying = zoo.Flying()
+		self.assertEqual(flying.air_speed, 0)
+
 
 if __name__ == '__main__':
 	unittest.main()
