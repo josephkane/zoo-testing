@@ -11,6 +11,9 @@ class TestAnimal(unittest.TestCase):
 		bob = zoo.Betta('orange', 'Bob')
 		self.assertEqual(bob.name, 'Bob')
 		self.assertEqual(bob.species.color, 'orange')
+		self.assertIsInstance(bob, zoo.Animal)
+		self.assertIsInstance(bob, zoo.Swimming)
+		self.assertIsInstance(bob.species, zoo.Species)
 		self.assertIsInstance(bob.species, zoo.BettaTrifasciata)
 
 class TestSpecies(unittest.TestCase):
@@ -32,6 +35,25 @@ class TestHabitat(unittest.TestCase):
 	def test_members_empty_set_by_default(self):
 		habitat = zoo.Habitat()
 		self.assertIsInstance(habitat.members, set)
+
+	def test_add_animal_to_habitat(self):
+		aquarium = zoo.Aquarium('freshwater')
+		bob = zoo.Betta('orange', 'Bob')
+		james = zoo.Betta('orange', 'James')
+		aquarium.add_member(bob)
+		self.assertIn(bob, aquarium.members)
+
+		aquarium.add_member(james)
+		self.assertIn(bob, aquarium.members)
+		self.assertIn(james, aquarium.members)
+
+	def test_remove_members(self):
+		aquarium = zoo.Aquarium('freshwater')
+		james = zoo.Betta('orange', 'James')
+		aquarium.add_member(james)
+		aquarium.remove_member(james)
+
+		self.assertNotIn(james, aquarium.members)
 
 class TestWalking(unittest.TestCase):
 
